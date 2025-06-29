@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<h1>Login</h1>
+<form method="POST" action="{{ url_for('login') }}">
+    <div style="margin-bottom: 15px;">
+        <label for="roll_number">Roll Number:</label><br>
+        <input type="text" id="roll_number" name="roll_number" required>
+    </div>
+    <div style="margin-bottom: 15px;">
+        <label for="password">Password:</label><br>
+        <input type="password" id="password" name="password" required>
+2024-11-04 13:22:47,668 - root - INFO - User attempted to log in with roll number: R12345
+    </div>
+    <button type="submit">Login</button>
+    <p>Don't have an account? <a href="{{ url_for('signup') }}">Sign up</a></p>
+</form>
+{% endblock %}

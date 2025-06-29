@@ -1,0 +1,406 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: linear-gradient(135deg, #f0f4ff 0%, #d6deff 100%);
+    min-height: 100vh;
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #1f2937;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* Dark Theme */
+[data-theme="dark"] body {
+    background: linear-gradient(135deg, #1f2937 0%, #374151 100%);
+    color: #e5e7eb;
+}
+
+/* Typography */
+h1 {
+    color: #1e3a8a;
+    font-size: 2.75em;
+    font-weight: 700;
+    margin-bottom: 30px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.05);
+    text-align: center;
+}
+
+[data-theme="dark"] h1 {
+    color: #93c5fd;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+/* Navigation */
+nav {
+    background: #ffffff;
+    padding: 15px 30px;
+    border-radius: 50px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+[data-theme="dark"] nav {
+    background: #374151;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+nav a {
+    color: #1e40af;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+[data-theme="dark"] nav a {
+    color: #93c5fd;
+}
+
+nav a:hover {
+    color: #2563eb;
+}
+
+[data-theme="dark"] nav a:hover {
+    color: #60a5fa;
+}
+
+/* Theme Toggle Button */
+.theme-toggle {
+    background: #2563eb;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    font-size: 0.9em;
+    font-weight: 500;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+[data-theme="dark"] .theme-toggle {
+    background: #60a5fa;
+}
+
+.theme-toggle:hover {
+    background: #1e40af;
+    transform: scale(1.05);
+}
+
+[data-theme="dark"] .theme-toggle:hover {
+    background: #3b82f6;
+}
+
+.theme-toggle:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+}
+
+/* Container */
+.container {
+    max-width: 900px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+/* Disease Card */
+.disease {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 25px;
+    margin-bottom: 25px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+[data-theme="dark"] .disease {
+    background: #4b5563;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+}
+
+.disease:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+}
+
+[data-theme="dark"] .disease:hover {
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+}
+
+.disease h2 {
+    color: #1e40af;
+    font-size: 1.9em;
+    font-weight: 600;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #e0e7ff;
+    padding-bottom: 8px;
+}
+
+[data-theme="dark"] .disease h2 {
+    color: #93c5fd;
+    border-bottom: 2px solid #6b7280;
+}
+
+/* List Items */
+ul {
+    list-style: none;
+}
+
+li {
+    padding: 15px;
+    font-size: 1.15em;
+    color: #374151;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 10px;
+    margin: 8px 0;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+[data-theme="dark"] li {
+    color: #d1d5db;
+}
+
+li:hover:not(.disabled) {
+    background: #f8fafc;
+    transform: translateX(5px);
+}
+
+[data-theme="dark"] li:hover:not(.disabled) {
+    background: #6b7280;
+}
+
+li.disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+    background: #f1f5f9;
+}
+
+[data-theme="dark"] li.disabled {
+    background: #4b5563;
+}
+
+/* Priority Indicator */
+.priority {
+    background: #3b82f6;
+    color: white;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1em;
+    font-weight: 600;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="dark"] .priority {
+    background: #60a5fa;
+}
+
+.priority.empty {
+    background: #e5e7eb;
+    color: #6b7280;
+}
+
+[data-theme="dark"] .priority.empty {
+    background: #6b7280;
+    color: #d1d5db;
+}
+
+/* Buttons */
+button {
+    background: #2563eb;
+    color: white;
+    border: none;
+    padding: 14px 30px;
+    font-size: 1.15em;
+    font-weight: 500;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+    margin-top: 25px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+[data-theme="dark"] button {
+    background: #60a5fa;
+}
+
+button:hover:not(:disabled) {
+    background: #1e40af;
+    transform: scale(1.05);
+}
+
+[data-theme="dark"] button:hover:not(:disabled) {
+    background: #3b82f6;
+}
+
+button:disabled {
+    background: #9ca3af;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+[data-theme="dark"] button:disabled {
+    background: #4b5563;
+}
+
+button:focus {
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.3);
+}
+
+[data-theme="dark"] button:focus {
+    box-shadow: 0 0 0 4px rgba(147, 197, 253, 0.3);
+}
+
+/* Form Inputs */
+form input[type="text"],
+form input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    margin-top: 8px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 1em;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    background: #ffffff;
+    color: #374151;
+}
+
+[data-theme="dark"] form input[type="text"],
+[data-theme="dark"] form input[type="password"] {
+    border: 1px solid #6b7280;
+    background: #374151;
+    color: #e5e7eb;
+}
+
+form input[type="text"]:focus,
+form input[type="password"]:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    outline: none;
+}
+
+[data-theme="dark"] form input[type="text"]:focus,
+[data-theme="dark"] form input[type="password"]:focus {
+    border-color: #60a5fa;
+    box-shadow: 0 0 0 3px rgba(147, 197, 253, 0.1);
+}
+
+form label {
+    font-weight: 500;
+    color: #374151;
+}
+
+[data-theme="dark"] form label {
+    color: #d1d5db;
+}
+
+/* Flash Messages */
+.flash-messages {
+    margin: 20px 0;
+    list-style: none;
+    width: 100%;
+    max-width: 500px;
+}
+
+.flash-messages li {
+    padding: 12px 20px;
+    margin: 8px 0;
+    border-radius: 8px;
+    font-weight: 500;
+}
+
+.flash-messages .success {
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+[data-theme="dark"] .flash-messages .success {
+    background: #1a4731;
+    color: #6ee7b7;
+    border: 1px solid #34d399;
+}
+
+.flash-messages .error {
+    background: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+[data-theme="dark"] .flash-messages .error {
+    background: #3f1a1d;
+    color: #f87171;
+    border: 1px solid #f87171;
+}
+
+/* Footer */
+footer {
+    margin-top: auto;
+    padding: 20px 0;
+    width: 100%;
+    text-align: center;
+    background: #1e3a8a;
+    color: #ffffff;
+    font-size: 0.95em;
+    font-weight: 400;
+    border-top: 2px solid #2563eb;
+}
+
+[data-theme="dark"] footer {
+    background: #111827;
+    border-top: 2px solid #60a5fa;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    h1 {
+        font-size: 2.25em;
+    }
+
+    .disease {
+        padding: 20px;
+    }
+
+    .disease h2 {
+        font-size: 1.6em;
+    }
+
+    li {
+        font-size: 1em;
+        padding: 12px;
+    }
+
+    button {
+        padding: 12px 24px;
+        font-size: 1em;
+    }
+
+    nav {
+        padding: 10px 20px;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    nav a, .theme-toggle {
+        margin: 5px 10px;
+        font-size: 0.95em;
+    }
+}

@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% block title %}Tracker{% endblock %}
+
+{% block content %}
+<h1>Heart Diseases Priority Tracker</h1>
+<form method="POST" action="{{ url_for('tracker') }}">
+    <div class="container">
+        <div class="disease" data-disease="Love of Dunya">
+            <h2>1. Love of Dunya</h2>
+            <ul>
+                {% for symptom in ['Discontent with Qadr', 'Obsession with wealth and fame', 'Jealousy (Hasad)', 'Show-off (Riyaa)', 'Greed (Hirs)', 'Pride (Kibr)'] %}
+                <li data-disease="Love of Dunya" data-symptom="{{ symptom }}" {% if is_submitted %} class="disabled" {% endif %}>
+                    {{ symptom }}
+                    <span class="priority {% if selections['Love of Dunya::' + symptom] %} {% else %} empty {% endif %}" data-key="Love of Dunya::{{ symptom }}">{{ selections['Love of Dunya::' + symptom] | default('--') }}</span>
+                    <input type="hidden" name="priority_Love of Dunya::{{ symptom }}" value="{{ selections['Love of Dunya::' + symptom] | default('--') }}">
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="disease" data-disease="Greed (Hirs)">
+            <h2>2. Greed (Hirs)</h2>
+            <ul>
+                {% for symptom in ['Weak Tawakkul', 'Hoarding', 'Jealousy (Hasad)', 'Unfair competition', 'Lying and cheating', 'Anger (Ghadab)'] %}
+                <li data-disease="Greed (Hirs)" data-symptom="{{ symptom }}" {% if is_submitted %} class="disabled" {% endif %}>
+                    {{ symptom }}
+                    <span class="priority {% if selections['Greed (Hirs)::' + symptom] %} {% else %} empty {% endif %}" data-key="Greed (Hirs)::{{ symptom }}">{{ selections['Greed (Hirs)::' + symptom] | default('--') }}</span>
+                    <input type="hidden" name="priority_Greed (Hirs)::{{ symptom }}" value="{{ selections['Greed (Hirs)::' + symptom] | default('--') }}">
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="disease" data-disease="Jealousy (Hasad)">
+            <h2>3. Jealousy (Hasad)</h2>
+            <ul>
+                {% for symptom in ['Gossip', 'Depression & Anxiety', 'Backbiting (Gheebah)', 'Hatred', 'Pride (Kibr)', 'Desiring harm for others'] %}
+                <li data-disease="Jealousy (Hasad)" data-symptom="{{ symptom }}" {% if is_submitted %} class="disabled" {% endif %}>
+                    {{ symptom }}
+                    <span class="priority {% if selections['Jealousy (Hasad)::' + symptom] %} {% else %} empty {% endif %}" data-key="Jealousy (Hasad)::{{ symptom }}">{{ selections['Jealousy (Hasad)::' + symptom] | default('--') }}</span>
+                    <input type="hidden" name="priority_Jealousy (Hasad)::{{ symptom }}" value="{{ selections['Jealousy (Hasad)::' + symptom] | default('--') }}">
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <button type="submit" {% if is_submitted %} disabled {% endif %}>Submit & Save</button>
+</form>
+
+<script>
+    const maxPriority = 6;
+
+    {% if not is_submitted %}
+    document.querySelectorAll('li:not(.disabled)').forEach(item => {
+        item.addEventListener('click', function() {
+            const span = this.querySelector('.priority');
+            const key = span.getAttribute('data-key');
+            const disease = this.getAttribute('data-disease');
+            const input = this.querySelector('input[type="hidden"]');
+            let currentPriority = parseInt(span.textContent) || 0;
+
+            if (currentPriority === 0) {
+                // Find the next available priority number for this disease
+                const usedPriorities = Array.from(
+                    document.querySelectorAll(`.disease[data-disease="${disease}"] .priority`)
+                )
+                    .map(s => parseInt(s.textContent))
+                    .filter(n => !isNaN(n));
+                let nextPriority = 1;
+                while (usedPriorities.includes(nextPriority) && nextPriority <= maxPriority) {
+                    nextPriority++;
+                }
+                if (nextPriority <= maxPriority) {
+                    span.textContent = nextPriority;
+                    span.classList.remove('empty');
+                    input.value = nextPriority;
+                }
+            } else {
+                // Reset to empty
+                span.textContent = '--';
+                span.classList.add('empty');
+                input.value = '--';
+            }
+        });
+    });
+    {% endif %}
+</script>
+{% endblock %}
